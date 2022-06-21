@@ -1,0 +1,4 @@
+def solution(s):
+    num = list(map(int, s.split(' ')))
+    answer = ''
+    return answer + str(min(num)) + ' ' + str(max(num))
