@@ -1,0 +1,14 @@
+rank = {6: 1, 5: 2, 4: 3, 3: 4, 2: 5, 1: 6, 0: 6}
+
+def solution(lottos, win_nums):
+    yes = 0
+    zero = 0
+    
+    for e in lottos:
+        if e == 0:
+            zero += 1
+            continue
+        if e in win_nums:
+            yes += 1
+            
+    return [rank[yes + zero], rank[yes]]
