@@ -1,0 +1,27 @@
+def solution(dartResult):
+    n = ''
+    lst = []
+    for i in dartResult:
+        if i.isnumeric():
+            n += i
+        elif i == 'S':
+            n = int(n) ** 1
+            lst.append(n)
+            n = ''
+        elif i == 'D':
+            n = int(n) ** 2
+            lst.append(n)
+            n = ''
+        elif i == 'T':
+            n = int(n) ** 3
+            lst.append(n)
+            n = ''
+        elif i == '*':
+            if len(lst) > 1:
+                lst[-1] *= 2
+                lst[-2] *= 2
+            else:
+                lst[-1] *= 2
+        elif i == '#':
+            lst[-1] *= -1
+    return sum(lst)
