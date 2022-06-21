@@ -1,0 +1,10 @@
+def solution(absolutes, signs):
+    cnt = 0
+    
+    for ab, si in zip(absolutes, signs):
+        if si:
+            cnt += ab
+        else:
+            cnt -= ab
+        
+    return cnt
