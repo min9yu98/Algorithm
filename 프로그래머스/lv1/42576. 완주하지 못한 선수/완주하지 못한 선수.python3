@@ -1,0 +1,8 @@
+def solution(participant, completion):
+    completion += ['z']
+    par, com = sorted(participant), sorted(completion)
+    for p, c in zip(par, com):
+        if p != c:
+            answer = p
+            break
+    return answer
