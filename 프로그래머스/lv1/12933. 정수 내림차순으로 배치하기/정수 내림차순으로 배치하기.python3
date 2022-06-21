@@ -1,0 +1,3 @@
+def solution(n):
+    num = list(map(str, reversed(sorted(str(n)))))
+    return int(''.join(num))
