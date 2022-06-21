@@ -1,0 +1,18 @@
+def gcd(n):
+    lst = []
+    for i in range(1, n + 1):
+        if n % i == 0:
+            lst.append(i)
+    return len(lst)
+
+def solution(left, right):
+    cnt = 0
+    
+    for i in range(left, right + 1):
+        length = gcd(i)
+        if length % 2 == 0:
+            cnt += i
+        else:
+            cnt -= i
+            
+    return cnt
