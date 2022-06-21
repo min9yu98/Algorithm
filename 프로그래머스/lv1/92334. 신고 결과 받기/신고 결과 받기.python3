@@ -1,0 +1,29 @@
+def solution(id_list, report, k):
+    report = list(set(report))
+    dic = {}
+    stop_member = []
+    member = {}
+    
+    for e in id_list:
+        dic[e] = 0
+        member[e] = 0
+        
+    for e in report:
+        e = e.split()
+        dic[e[1]] += 1
+    
+    for a, b in dic.items():
+        if b >= k:
+            stop_member.append(a)
+    
+    if stop_member == []:
+        return [0 for _ in range(len(id_list))]
+    
+    for e in report:
+        e = e.split()
+        if e[1] in stop_member:
+            member[e[0]] += 1
+    
+    answer = [b for a, b in member.items()]
+    
+    return answer
