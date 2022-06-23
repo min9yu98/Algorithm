@@ -1,10 +1,10 @@
-def hanoi(n, start, mid, end):
+def hanoi(n, start, aux, goal): # 시작 지점, 보조 지점, 목표지점
   if n == 1:
-    print(start, end)
+    print(start, goal)
     return
-  hanoi(n - 1, start, end, mid)
-  print(start, end)
-  hanoi(n - 1, mid, start, end)
+  hanoi(n - 1, start, goal, aux)
+  print(start, goal)
+  hanoi(n - 1, aux, start, goal)
 
 
 n = int(input())
