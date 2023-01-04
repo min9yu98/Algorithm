@@ -1,14 +1,14 @@
-# [Bronze V] 피보나치 수 5 - 10870 
+# [Bronze II] 피보나치 수 5 - 10870 
 
 [문제 링크](https://www.acmicpc.net/problem/10870) 
 
 ### 성능 요약
 
-메모리: 29200 KB, 시간: 76 ms
+메모리: 2020 KB, 시간: 0 ms
 
 ### 분류
 
-구현(implementation), 수학(math), 재귀(recursion)
+구현(implementation), 수학(math)
 
 ### 문제 설명
 
