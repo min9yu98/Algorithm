@@ -16,8 +16,7 @@
 
 using namespace std;
 
-int n, age;
-string name;
+int n;
 vector<pair<int, string>> vp;
 pair<int, string> p;
 
