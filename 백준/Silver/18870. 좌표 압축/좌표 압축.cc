@@ -16,15 +16,9 @@
 
 using namespace std;
 
-int n, x, y;
+int n, x;
 vector<int> num;
 vector<int> v;
-vector<int> idx;
-pair<int, int> p;
-
-bool comp(pair<int, string> a, pair<int, string> b){
-    return a.first < b.first;
-}
 
 int main(){
     ios_base::sync_with_stdio(false);
