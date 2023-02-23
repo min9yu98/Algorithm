@@ -21,17 +21,6 @@ int oper[4] = {0, 0, 0, 0};
 int n, maxi = -1000000001, mini = 1000000001;
 int v[11];
 
-int calc(int a, int op, int b){
-    if (op == 0)
-        return a + b;
-    else if (op == 1)
-        return a - b;
-    else if (op == 2)
-        return a * b;
-    else
-        return a / b;
-}
-
 void dp(int result, int idx){
     if (idx == n){
         if (result > maxi)
