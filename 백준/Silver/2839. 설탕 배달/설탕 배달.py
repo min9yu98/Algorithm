@@ -1,14 +1,15 @@
-sugar = int(input())
-box = 0
+import sys
+
+n = int(input())
+result = 0
 
 while True:
-    if sugar % 5 == 0:
-        box = box + sugar//5
-        print(box)
+    if n % 5 == 0:
+        result += n // 5
+        print(result)
         break
-    sugar -= 3
-    box += 1
-    if sugar < 0:
+    n -= 3
+    result += 1
+    if n < 0:
         print(-1)
         break
-    
