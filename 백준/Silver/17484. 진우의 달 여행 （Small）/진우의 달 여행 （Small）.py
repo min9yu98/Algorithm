@@ -1,22 +1,23 @@
-## 테스트 ## 
-
 import sys
 
 n, m = map(int, input().split())
-grid = [list(map(int, input().split())) for _ in range(n)]
-dir = {1: (1, -1), 2: (1, 0), 3: (1, 1)}
+graph = [list(map(int, input().split())) for _ in range(n)]
+move = [(-1, 1), (0, 1), (1, 1)]  # (x, y)
 
-def dfs(i, j, now_dir, min_fuel, fuel):
-    if i == n-1:
-        return min(min_fuel, fuel)
-    for k in range(1, 4):
-        if now_dir != k:
-            if 0 <= i+dir[k][0] < n and 0 <= j+dir[k][1] < m:
-                min_fuel = dfs(i+dir[k][0], j+dir[k][1], k, min_fuel, fuel+grid[i+dir[k][0]][j+dir[k][1]])
-    return min_fuel
+
+def dp(x, y, move_idx, min_cnt, cnt):
+    if y == n - 1:
+        return min(min_cnt, cnt)
+    for i in range(3):  # len(move)
+        if i != move_idx:
+            X, Y = x + move[i][0], y + move[i][1]
+            if 0 <= X < m and 0 <= Y < n:
+                min_cnt = dp(X, Y, i, min_cnt, cnt + graph[Y][X])
+    return min_cnt
+
 
 min_fuel = int(sys.maxsize)
 for i in range(m):
-    min_fuel = min(dfs(0, i, 0, min_fuel, grid[0][i]), min_fuel)
-
+    for j in range(3):
+        min_fuel = min(dp(i, 0, j, min_fuel, graph[0][i]), min_fuel)
 print(min_fuel)
