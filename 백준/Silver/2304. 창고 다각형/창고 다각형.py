@@ -1,36 +1,32 @@
-## test ##
+warehouses = []
+total = 0
 n = int(input())
 
-lst = []
-result = 0
-for i in range(n) :
-    a,b = map(int,input().split())
-    lst.append([a,b])
-lst.sort()
+for _ in range(n):
+    l, h = map(int, input().split())
+    warehouses.append((l, h))
+warehouses.sort()
 
-i = 0
-for l in lst :
-    if l[1] >result :
-        result = l[1]
-        idx = i
-    i += 1
+max_h_idx = 0
+for i in range(n):
+    if total < warehouses[i][1]:
+        total = warehouses[i][1]
+        max_h_idx = i
 
-height = lst[0][1]
+h = warehouses[0][1]
+for i in range(max_h_idx):
+    if h < warehouses[i + 1][1]:
+        total += (warehouses[i + 1][0] - warehouses[i][0]) * h
+        h = warehouses[i + 1][1]
+    else:
+        total += (warehouses[i + 1][0] - warehouses[i][0]) * h
 
-for i in range(idx) :
-    if height < lst[i+1][1] :
-        result += height * (lst[i+1][0]-lst[i][0])
-        height = lst[i+1][1]
-    else :
-        result += height * (lst[i+1][0] - lst[i][0])
+h = warehouses[-1][1]
+for i in range(n - 1, max_h_idx, -1):
+    if h < warehouses[i - 1][1]:
+        total += (warehouses[i][0] - warehouses[i - 1][0]) * h
+        h = warehouses[i - 1][1]
+    else:
+        total += (warehouses[i][0] - warehouses[i - 1][0]) * h
 
-height = lst[-1][1]
-
-for i in range(n-1, idx, -1) :
-    if height < lst[i-1][1] :
-        result += height * (lst[i][0]-lst[i-1][0])
-        height = lst[i-1][1]
-    else :
-        result += height * (lst[i][0] - lst[i-1][0])
-
-print(result)
+print(total)
