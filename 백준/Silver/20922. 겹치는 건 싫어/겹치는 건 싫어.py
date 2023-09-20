@@ -1,15 +1,19 @@
-n, k = map(int, input().split())
-lst = list(map(int, input().split()))
-x, y = 0, 0
-check_lst = [0] * (max(lst) + 1)
-ans = 0
+import sys
 
-while y < n:
-    if check_lst[lst[y]] < k:
-        check_lst[lst[y]] += 1
-        y += 1
+n, m = map(int, sys.stdin.readline().split())
+lst = list(map(int, sys.stdin.readline().split()))
+check = [0] * (max(lst) + 1)
+result = 0
+i, j = 0, 0
+
+while j < n:
+    if check[lst[j]] < m:
+        check[lst[j]] += 1
+        j += 1
     else:
-        check_lst[lst[x]] -= 1
-        x += 1
-    ans = max(ans, y - x)
-print(ans)
+        check[lst[i]] -= 1
+        i += 1
+
+    result = max(result, j - i)
+
+print(result)
