@@ -6,14 +6,18 @@ move_x = [1, -1, 1, -1, 0, 0, 1, -1]
 move_y = [1, -1, -1, 1, 1, -1, 0, 0]
 
 
-def dfs(x, y):
+def bfs(x, y):
+    queue = deque([(x, y)])
     graph[y][x] = 0
-    for i in range(8):
-        dx = x + move_x[i]
-        dy = y + move_y[i]
-        if 0 <= dx < w and 0 <= dy < h:
-            if graph[dy][dx] == 1:
-                dfs(dx, dy)
+    while queue:
+        lx, ly = queue.popleft()
+        for i in range(8):
+            dx = lx + move_x[i]
+            dy = ly + move_y[i]
+            if 0 <= dx < w and 0 <= dy < h and graph[dy][dx] == 1:
+                graph[dy][dx] = 0
+                queue.append((dx, dy))
+    return 1
 
 
 while True:
@@ -29,6 +33,5 @@ while True:
     for i in range(h):
         for j in range(w):
             if graph[i][j] == 1:
-                dfs(j, i)
-                result += 1
+                result += bfs(j, i)
     print(result)
