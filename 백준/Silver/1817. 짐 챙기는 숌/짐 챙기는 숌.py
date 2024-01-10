@@ -3,25 +3,16 @@ import sys
 input = sys.stdin.readline
 
 n, m = map(int, input().split())
-box = list(map(int, input().split()))
 if n == 0:
     print(n)
 else:
-    result = 0
+    box = list(map(int, input().split()))
+    result = 1
     tmp = 0
-    idx = 0
-    while idx < n:
-        tmp += box[idx]
-        if tmp > m:
-            result += 1
-            tmp = 0
-        elif tmp == m:
-            result += 1
-            tmp = 0
-            idx += 1
+    for i in range(len(box)):
+        if box[i] + tmp <= m:
+            tmp += box[i]
         else:
-            idx += 1
-            continue
-    if tmp != 0:
-        result += 1
+            result += 1
+            tmp = box[i]
     print(result)
