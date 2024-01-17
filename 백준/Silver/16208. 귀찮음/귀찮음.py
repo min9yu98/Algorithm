@@ -5,7 +5,9 @@ n = int(input())
 lst = list(map(int, input().split()))
 
 lst.sort()
-total = 0
-for i in range(len(lst)):
-    total += lst[i] * sum(lst[i + 1:])
-print(total)
+answer = 0
+total = sum(lst)
+for e in lst:
+    answer += e * (total - e)
+    total -= e
+print(answer)
