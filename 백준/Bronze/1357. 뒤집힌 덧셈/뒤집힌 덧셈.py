@@ -1,0 +1,5 @@
+a, b = map(int, input().split())
+a_, b_ = list(reversed(list(str(a)))), list(reversed(list(str(b))))
+a_rev, b_rev = int(''.join(a_)), int(''.join(b_))
+total = list(reversed(list(str(a_rev + b_rev))))
+print(int(''.join(total)))
