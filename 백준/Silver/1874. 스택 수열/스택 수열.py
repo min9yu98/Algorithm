@@ -4,28 +4,25 @@ from copy import deepcopy
 input = sys.stdin.readline
 
 n = int(input())
-order = [int(input()) for _ in range(n)]
 stack = []
 ans = []
-
 idx = 1
-stack.append(idx)
-ans.append("+")
-while order:
-    if stack:
-        if stack[-1] == order[0]:
-            ans.append("-")
-            order.pop(0)
-            stack.pop()
-            continue
-    if idx < n:
-        idx += 1
-    stack.append(idx)
-    ans.append("+")
-    if len(stack) > 2:
-        if stack[-1] == stack[-2]:
-            ans = ['NO']
-            break
+flag = True
 
-for e in ans:
-    print(e)
+for _ in range(n):
+    num = int(input())
+    while idx <= num:
+        stack.append(idx)
+        ans.append("+")
+        idx += 1
+    if stack[-1] == num:
+        stack.pop()
+        ans.append("-")
+    else:
+        flag = False
+        break
+if flag:
+    for e in ans:
+        print(e)
+else:
+    print("NO")
