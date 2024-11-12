@@ -1,21 +1,24 @@
 import sys
 
-n = int(sys.stdin.readline())
-budget = list(map(int, sys.stdin.readline().rstrip().split()))
-m = int(sys.stdin.readline())
+input = sys.stdin.readline
 
-start, end = 0, max(budget)
+n = int(input())
+budgets = list(map(int, input().split()))
+m = int(input())
 
+budgets.sort()
+
+start, end = 0, budgets[-1]
 while start <= end:
-    mid = (start + end) // 2
-    total = 0
-    for e in budget:
-        if e > mid:
-            total += mid
+    middle = (start + end) // 2
+    tmp = 0
+    for b in budgets:
+        if b <= middle:
+            tmp += b
         else:
-            total += e
-    if total <= m:
-        start = mid + 1
+            tmp += middle
+    if tmp > m:
+        end = middle - 1
     else:
-        end = mid - 1
+        start = middle + 1
 print(end)
