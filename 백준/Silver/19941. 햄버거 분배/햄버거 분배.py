@@ -1,11 +1,15 @@
+import sys
+
+input = sys.stdin.readline
+
 n, k = map(int, input().split())
-lst = list(map(str, input()))
+choice = list(input().strip())
 cnt = 0
 for i in range(n):
-    if lst[i] == 'P':
+    if choice[i] == 'P':
         for j in range(max(i - k, 0), min(n, i + k + 1)):
-            if lst[j] == 'H':
+            if choice[j] == 'H':
                 cnt += 1
-                lst[j] = 0
+                choice[j] = 'O'
                 break
 print(cnt)
