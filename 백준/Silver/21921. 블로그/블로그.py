@@ -4,25 +4,23 @@ input = sys.stdin.readline
 
 n, x = map(int, input().split())
 visitors = list(map(int, input().split()))
-max_visit = 0
-max_visit_count = 1
 
-if max(visitors) == 0:
-    print("SAD")
+if sum(visitors) == 0:
+    print('SAD')
     exit(0)
 
-max_visit = sum(visitors[0:x])
-sum_visitors = sum(visitors[0:x])
+sum_v = sum(visitors[0: x])
+ans = sum(visitors[0: x])
+max_cnt = 1
 for i in range(n - x):
-    sum_visitors -= visitors[i]
-    sum_visitors += visitors[i + x]
-    if sum_visitors >= max_visit:
-        if sum_visitors == max_visit:
-            max_visit_count += 1
+    sum_v -= visitors[i]
+    sum_v += visitors[i + x]
+    if ans <= sum_v:
+        if ans == sum_v:
+            max_cnt += 1
         else:
-            max_visit_count = 1
-        max_visit = sum_visitors
+            max_cnt = 1
+        ans = sum_v
 
-print(max_visit)
-print(max_visit_count)
-
+print(ans)
+print(max_cnt)
