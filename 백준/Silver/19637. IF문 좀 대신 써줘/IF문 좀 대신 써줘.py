@@ -2,27 +2,26 @@ import sys
 
 input = sys.stdin.readline
 
-N, M = map(int, input().split())
-power_lst = []
+n, m = map(int, input().split())
 name_lst = []
-for i in range(N):
-    stand, stand_score = input().split()
-    power_lst.append(int(stand_score))
-    name_lst.append(stand)
+power_lst = []
+for _ in range(n):
+    name, power = input().strip().split()
+    name_lst.append(name)
+    power_lst.append(int(power))
 
 
 def binary_search(score):
-    left = 0
-    right = len(power_lst) - 1
-    while left <= right:
-        mid = (left + right) // 2
+    start, end = 0, len(power_lst) - 1
+    while start <= end:
+        mid = (start + end) // 2
         if score > power_lst[mid]:
-            left = mid + 1
+            start = mid + 1
         else:
-            right = mid - 1
-    return name_lst[right + 1]
+            end = mid - 1
+    return name_lst[start]
 
 
-for _ in range(M):
-    score = int(input())
-    print(binary_search(score))
+for _ in range(m):
+    sc = int(input())
+    print(binary_search(sc))
