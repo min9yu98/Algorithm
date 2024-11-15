@@ -1,8 +1,11 @@
-p, m = map(int, input().split())
-room = list()
+import sys
 
+input = sys.stdin.readline
+
+p, m = map(int, input().split())
+room = []
 for _ in range(p):
-    l, n = input().split()
+    l, n = input().strip().split()
     l = int(l)
     flag = False
     for r in room:
@@ -15,10 +18,9 @@ for _ in range(p):
 
 for r in room:
     if len(r) == m:
-        print("Started!")
+        print('Started!')
     else:
-        print("Waiting!")
+        print('Waiting!')
     r.sort(key=lambda x: x[1])
-    for l, n in r:
-        print(l, n)
-
+    for e in r:
+        print(e[0], e[1])
