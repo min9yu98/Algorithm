@@ -1,21 +1,15 @@
-## 테스트 ## 
 import sys
 
-def solution() :
-    n, m = map(int, sys.stdin.readline().split())
-    board = dict()
-    for _ in range(n) :
-        board[sys.stdin.readline().rstrip()] = 1
-        
-    res = n
-    for _ in range(m) :
-        tmp = sorted(sys.stdin.readline().rstrip().split(','))
-        
-        for t in tmp :
-            if t in board.keys() :
-                if board[t] == 1 :
-                    board[t] -= 1
-                    res -= 1
-        print(res)
-        
-solution()
+input = sys.stdin.readline
+
+n, m = map(int, input().split())
+memo = {input().strip() : 1 for _ in range(n)}
+tmp = n
+for _ in range(m):
+    lst = input().strip().split(',')
+    for e in lst:
+        if e in memo.keys():
+            if memo[e] == 1:
+                memo[e] -= 1
+                tmp -= 1
+    print(tmp)
