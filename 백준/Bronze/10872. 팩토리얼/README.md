@@ -1,14 +1,18 @@
-# [Bronze V] 팩토리얼 - 10872 
+# [Bronze III] 팩토리얼 - 10872 
 
 [문제 링크](https://www.acmicpc.net/problem/10872) 
 
 ### 성능 요약
 
-메모리: 2020 KB, 시간: 0 ms
+메모리: 17660 KB, 시간: 168 ms
 
 ### 분류
 
-구현(implementation), 수학(math), 조합론(combinatorics)
+구현, 수학
+
+### 제출 일자
+
+2024년 11월 18일 21:25:55
 
 ### 문제 설명
 
