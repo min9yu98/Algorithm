@@ -23,9 +23,10 @@ public class Main {
 				tmp %= 1234567891;
 			}
 			ans += tmp % 1234567891;
+			ans %= 1234567891;
 		}
 
-		bw.write(ans + "\n");
+		bw.write(ans % 1234567891 + "\n");
 
 		br.close();
 		bw.flush();
