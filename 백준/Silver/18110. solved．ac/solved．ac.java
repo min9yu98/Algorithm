@@ -14,19 +14,15 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
 		int stand = (int) Math.round(N * (0.15));
-		int top = N - stand;
-		int bottom = stand - 1;
-		int sum = 0;
+		double sum = 0;
 		int[] arr = new int[N];
 		for (int i = 0; i < N; i++) {
 			arr[i] = Integer.parseInt(br.readLine());
 		}
 		Arrays.sort(arr);
-		for (int i = 0; i < N; i++) {
-			if (i >= stand && i < top) {
-				sum += arr[i];
-			}
+		for (int i = stand; i < N - stand; i++) {
+			sum += arr[i];
 		}
-		System.out.println(Math.round((double) sum / (N - (stand * 2))));
+		System.out.println((int) Math.round(sum / (N - (stand * 2))));
 	}
 }
