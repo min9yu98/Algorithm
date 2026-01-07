@@ -16,17 +16,21 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
 		int M = Integer.parseInt(br.readLine());
-		String s = br.readLine();
-		StringBuilder check = new StringBuilder("I");
-		for (int i = 0; i < N; i++) {
-			check.append("OI");
-		}
+		char s[] = br.readLine().toCharArray();
 
 		int result = 0;
-		int idx = 0;
-		while ((idx = s.indexOf(String.valueOf(check), idx)) != -1) {
-			result++;
-			idx++;
+		int cnt = 0;
+		for (int i = 1; i < M - 1; i++) {
+			if (s[i - 1] == 'I' && s[i] == 'O' && s[i + 1] == 'I') {
+				cnt++;
+				if (cnt == N) {
+					cnt--;
+					result++;
+				}
+				i++;
+			} else {
+				cnt = 0;
+			}
 		}
 
 		System.out.println(result);
