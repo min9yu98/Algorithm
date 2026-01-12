@@ -34,7 +34,7 @@ public class Main {
 		if (r < size / 2 && c < size / 2) {
 			find(size / 2, r, c);
 		} else if (r < size / 2 && c >= size / 2) {
-			cnt += size * size / 4;
+			cnt += (size * size / 4);
 			find(size / 2, r, c - size / 2);
 		} else if (r >= size / 2 && c < size / 2) {
 			cnt += (size * size / 4) * 2;
