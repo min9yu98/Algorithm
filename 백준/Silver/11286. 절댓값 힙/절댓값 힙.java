@@ -2,8 +2,11 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,17 +31,22 @@ public class Main {
 				}
 			}
 		});
+
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < N; i++) {
 			int x = Integer.parseInt(br.readLine());
 			if (x == 0) {
-				if (pq.isEmpty()) {
-					System.out.println(0);
+				if (!pq.isEmpty()) {
+					sb.append(pq.poll()).append("\n");
 				} else {
-					System.out.println(pq.poll());
+					sb.append(0).append("\n");
 				}
 			} else {
 				pq.offer(x);
 			}
 		}
+		System.out.println(sb.toString());
 	}
+
+
 }
