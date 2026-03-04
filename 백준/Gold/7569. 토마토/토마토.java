@@ -1,4 +1,5 @@
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,19 +17,17 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-	static int inputX, inputY, inputZ;
+	static int m, n, h;
 	static int[][][] arr;
-	static int[] dx = {0, 0, -1, 1, 0, 0};
-	static int[] dy = {1, -1, 0, 0, 0, 0};
-	static int[] dz = {0, 0, 0, 0, -1, 1};
-	static Queue<Point> q = new LinkedList<>();
+	static int[] nx = {0, 0, 1, -1, 0, 0};
+	static int[] ny = {1, -1, 0, 0, 0, 0};
+	static int[] nz = {0, 0, 0, 0, 1, -1};
+	static Queue<point> q = new LinkedList<>();
 
-	static class Point {
-		int x;
-		int y;
-		int z;
+	static class point {
+		int x, y, z; // n, m, h
 
-		Point(int z, int x, int y) {
+		point(int x, int y, int z) {
 			this.x = x;
 			this.y = y;
 			this.z = z;
@@ -38,76 +37,65 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		inputY = Integer.parseInt(st.nextToken());
-		inputX = Integer.parseInt(st.nextToken());
-		inputZ = Integer.parseInt(st.nextToken());
 
-		arr = new int[inputZ][inputX][inputY];
+		m = Integer.parseInt(st.nextToken()); // 가로
+		n = Integer.parseInt(st.nextToken()); // 세로
+		h = Integer.parseInt(st.nextToken()); // 높이
 
-		for (int k = 0; k < inputZ; k++) {
-			for (int i = 0; i < inputX; i++) {
+		arr = new int[h][n][m];
+		for (int i = 0; i < h; i++) {
+			for (int j = 0; j < n; j++) {
 				st = new StringTokenizer(br.readLine());
-				for (int j = 0; j < inputY; j++) {
-					arr[k][i][j] = Integer.parseInt(st.nextToken());
-				}
-			}
-		}
-
-		for (int k = 0; k < inputZ; k++) {
-			for (int i = 0; i < inputX; i++) {
-				for (int j = 0; j < inputY; j++) {
-					if (arr[k][i][j] == 1) {
-						q.add(new Point(k, i, j));
+				for (int k = 0; k < m; k++) {
+					arr[i][j][k] = Integer.parseInt(st.nextToken());
+					if (arr[i][j][k] == 1) {
+						q.add(new point(j, k, i));
 					}
 				}
 			}
 		}
 
 		bfs();
-		checkBox();
+		checkArr();
 	}
 
-	static void bfs() {
+	private static void bfs() {
 		while (!q.isEmpty()) {
-			Point tmp = q.poll();
-			int tz = tmp.z;
-			int tx = tmp.x;
-			int ty = tmp.y;
+			point p = q.poll();
+			int x = p.x;
+			int y = p.y;
+			int z = p.z;
 
 			for (int i = 0; i < 6; i++) {
-				int nx = tx + dx[i];
-				int ny = ty + dy[i];
-				int nz = tz + dz[i];
+				int mx = x + nx[i];
+				int my = y + ny[i];
+				int mz = z + nz[i];
 
-				if (nx >= 0 && ny >= 0 && nz >= 0 && nx < inputX && ny < inputY && nz < inputZ) {
-					if (arr[nz][nx][ny] == 0) {
-						q.add(new Point(nz, nx, ny));
-						arr[nz][nx][ny] = arr[tz][tx][ty] + 1;
+				if (0 <= mx && mx < n && 0 <= my && my < m && 0 <= mz && mz < h) {
+					if (arr[mz][mx][my] == 0) {
+						arr[mz][mx][my] = arr[z][x][y] + 1;
+						q.add(new point(mx, my, mz));
 					}
 				}
 			}
 		}
 	}
 
-	static void checkBox() {
-		int days = 0;
-		for (int k = 0; k < inputZ; k++) {
-			for (int i = 0; i < inputX; i++) {
-				for (int j = 0; j < inputY; j++) {
-					if (arr[k][i][j] == 0) {
+	private static void checkArr() {
+		int max = 0;
+
+		for (int i = 0; i < h; i++) {
+			for (int j = 0; j < n; j++) {
+				for (int k = 0; k < m; k++) {
+					if (arr[i][j][k] == 0) {
 						System.out.println(-1);
 						return;
 					}
-					days = Math.max(days, arr[k][i][j]);
+					max = Math.max(arr[i][j][k], max);
 				}
 			}
 		}
-
-		if (days == 1) {
-			System.out.println(0);
-		} else {
-			System.out.println(days - 1);
-		}
+		System.out.println(max - 1);
 	}
 
 }
