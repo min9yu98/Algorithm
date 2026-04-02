@@ -41,29 +41,29 @@ public class Main {
 			graph.get(a).add(new Node(b, w));
 		}
 
-		for (int i = 0; i < V + 1; i++) {
+		for (int i = 1; i < V + 1;i ++) {
 			numbers[i] = Integer.MAX_VALUE;
 		}
 		numbers[K] = 0;
 
 		for (int i = 1; i < V + 1; i++) {
-			int nodeVal = Integer.MAX_VALUE;
-			int nodeIdx = 0;
+			int tmpIdx = 0;
+			int tmpVal = Integer.MAX_VALUE;
 
 			for (int j = 1; j < V + 1; j++) {
-				if (!visited[j] && numbers[j] < nodeVal) {
-					nodeVal = numbers[j];
-					nodeIdx = j;
+				if (!visited[j] && tmpVal > numbers[j]) {
+					tmpIdx = j;
+					tmpVal = numbers[j];
 				}
 			}
 
-			visited[nodeIdx] = true;
+			visited[tmpIdx] = true;
 
-			for (int j = 0; j < graph.get(nodeIdx).size(); j++) {
-				Node adjNode = graph.get(nodeIdx).get(j);
+			for (int j = 0; j < graph.get(tmpIdx).size(); j++) {
+				Node tmpNode = graph.get(tmpIdx).get(j);
 
-				if (numbers[adjNode.idx] > numbers[nodeIdx] + adjNode.weight) {
-					numbers[adjNode.idx] = numbers[nodeIdx] + adjNode.weight;
+				if (numbers[tmpNode.idx] > numbers[tmpIdx] + tmpNode.weight) {
+					numbers[tmpNode.idx] = numbers[tmpIdx] + tmpNode.weight;
 				}
 			}
 		}
