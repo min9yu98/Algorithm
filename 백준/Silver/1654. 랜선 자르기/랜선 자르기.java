@@ -1,48 +1,45 @@
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
+import java.io.IOException;
 
 public class Main {
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
+
 		int K = Integer.parseInt(st.nextToken());
 		int N = Integer.parseInt(st.nextToken());
 
-		int[] arr = new int[K];
-
-		long max = 0;
-
+		long t = 0;
+		long[] arr = new long[K];
 		for (int i = 0; i < K; i++) {
-			arr[i] = Integer.parseInt(br.readLine());
-			if (max < arr[i]) max = arr[i];
+			arr[i] = Long.parseLong(br.readLine());
+			if (t < arr[i]) t = arr[i];
 		}
 
-		max++;
+		long result = 0;
+		long start = 1;
+		long end = t;
+		while (start <= end) {
+			long mid = (start + end) / 2;
 
-		long min = 0;
-		long mid = 0;
-
-		while (min < max) {
-			mid = (max + min) / 2;
-			long cnt = 0;
-			for (int i = 0; i < arr.length; i++) {
-				cnt += arr[i] / mid;
+			long tmp = 0;
+			for (int i = 0; i < K; i++) {
+				tmp += (int)(arr[i] / mid);
 			}
-			if (cnt < N) {
-				max = mid;
+
+			if (N > tmp) {
+				end = mid  - 1;
 			} else {
-				min = mid + 1;
+				result = Math.max(mid, result);
+				start = mid + 1;
 			}
 		}
 
-		System.out.println(min - 1);
+		System.out.println(result);
 	}
 
 }
