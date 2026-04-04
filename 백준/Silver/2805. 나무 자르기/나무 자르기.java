@@ -1,43 +1,48 @@
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.*;
+import java.io.IOException;
 
 public class Main {
-
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
+
 		int N = Integer.parseInt(st.nextToken());
-		int M = Integer.parseInt(st.nextToken());
-		int[] arr = new int[N];
+		long M = Long.parseLong(st.nextToken());
+		long[] arr = new long[N];
+
+		long std = 0;
 		st = new StringTokenizer(br.readLine());
-		int maxi = 0;
 		for (int i = 0; i < N; i++) {
-			arr[i] = Integer.parseInt(st.nextToken());
-			if (maxi < arr[i]) maxi = arr[i];
+			arr[i] = Long.parseLong(st.nextToken());
+			if (std < arr[i]) {
+				std = arr[i];
+			}
 		}
 
-		maxi++;
-		int mini = 0;
-		while (mini <= maxi) {
-			int mid = (maxi + mini) / 2;
+		long start = 0;
+		long end = std;
+		long result = 0;
+		while (start <= end) {
+			long mid = (start + end) / 2;
 
 			long tmp = 0;
 			for (int i = 0; i < N; i++) {
-				if (mid < arr[i]) {
-					tmp += arr[i] - mid;
-				}
+				if (arr[i] - mid > 0) tmp += arr[i] - mid;
 			}
 
-			if (tmp < M) {
-				maxi = mid - 1;
+			if (tmp >= M) {
+				start = mid + 1;
+				result = mid;
 			} else {
-				mini = mid + 1;
+				end = mid - 1;
 			}
 		}
-		System.out.println(mini - 1);
+
+		System.out.println(result);
 	}
+
 }
