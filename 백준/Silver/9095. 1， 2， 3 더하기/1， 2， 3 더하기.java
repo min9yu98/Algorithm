@@ -1,20 +1,28 @@
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.*;
+import java.io.IOException;
 
 public class Main {
-	public static void main(String[] args) throws IOException{
+
+	static Integer[] dp;
+
+	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		int t = Integer.parseInt(br.readLine());
-		int[] arr = new int[12];
-		arr[1] = 1;
-		arr[2] = 2;
-		arr[3] = 4;
-		for (int z = 0; z < t; z++) {
-			int n = Integer.parseInt(br.readLine());
-			for (int i = 4; i <= n; i++) {
-				arr[i] = arr[i - 3] + arr[i - 2] + arr[i - 1];
-			}
-			System.out.println(arr[n]);
+		int[] dp = new int[12];
+		dp[1] = 1;
+		dp[2] = 2; // 1 + 1, 2
+		dp[3] = 4; // 1 + 1 + 1, 2 + 1, 1 + 2, 3
+		for (int i = 4; i < 12; i++) {
+			dp[i] = dp[i - 3] + dp[i - 2] + dp[i - 1];
 		}
+		int T = Integer.parseInt(br.readLine());
+		for (int i = 0; i < T; i++) {
+			int n = Integer.parseInt(br.readLine());
+			System.out.println(dp[n]);
+		}
+
 	}
 }
+
