@@ -9,12 +9,14 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
+		StringBuilder sb = new StringBuilder();
 
 		String S = br.readLine();
+		int N = S.length();
 		int q = Integer.parseInt(br.readLine());
-		int[][] prefix = new int[26][S.length() + 1];
+		int[][] prefix = new int[26][N + 1];
 
-		for (int i = 1; i < S.length() + 1; i++) {
+		for (int i = 1; i < N + 1; i++) {
 			char c = S.charAt(i - 1);
 			for (int j = 0; j < 26; j++) {
 				prefix[j][i] = prefix[j][i - 1];
@@ -28,8 +30,10 @@ public class Main {
 			int start = Integer.parseInt(st.nextToken());
 			int end = Integer.parseInt(st.nextToken());
 
-			System.out.println(prefix[a - 'a'][end + 1] - prefix[a - 'a'][start]);
+			sb.append(prefix[a - 'a'][end + 1] - prefix[a - 'a'][start]).append('\n');
 		}
+
+		System.out.println(sb);
 	}
 
 }
