@@ -1,27 +1,36 @@
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.*;
+import java.io.IOException;
 
 public class Main {
-	public static void main(String[] args) throws IOException{
+
+	static Integer[] dp;
+
+	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		int n = Integer.parseInt(br.readLine());
-		int[] arr = new int[1000001];
-		arr[1] = 0;
-		arr[2] = 1;
-		arr[3] = 1;
-		for (int i = 4; i <= n; i++) {
-			if (i % 2 == 0 && i % 3 == 0) {
-				arr[i] = Math.min(arr[i - 1] + 1, Math.min(arr[i / 2] + 1, arr[i / 3] + 1));
-			} else if (i % 2 == 0) {
-				arr[i] = Math.min(arr[i - 1] + 1, arr[i / 2] + 1);
-			} else if (i % 3 == 0) {
-				arr[i] = Math.min(arr[i - 1] + 1, arr[i / 3] + 1);
-			} else {
-				arr[i] = arr[i - 1] + 1;
-			}
-		}
-		System.out.println(arr[n]);
+		int N = Integer.parseInt(br.readLine());
+
+		dp = new Integer[N + 1];
+		dp[0] = dp[1] = 0;
+
+		System.out.println(recur(N));
 	}
 
+	private static int recur(int num) {
+		if (dp[num] == null) {
+			if (num % 6 == 0) {
+				dp[num] = Math.min(recur(num - 1), Math.min(recur(num / 3), recur(num / 2))) + 1;
+			} else if (num % 3 == 0) {
+				dp[num] = Math.min(recur(num / 3), recur(num - 1)) + 1;
+			} else if (num % 2 == 0) {
+				dp[num] = Math.min(recur(num / 2), recur(num - 1)) + 1;
+			} else {
+				dp[num] = recur(num - 1) + 1;
+			}
+		}
 
+		return dp[num];
+	}
 }
